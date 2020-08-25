@@ -1,0 +1,297 @@
+<style>
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+p {
+	font-family:Helvetica;
+}
+
+div h1 {
+	text-align: left;
+	font-family:Geneva;	
+	margin-top: 0;
+	padding: 10px;
+	
+}
+
+.header-banner h2 {
+	font-family: Helvetica;
+	font-size: 50px;
+	padding-top: 0;
+	
+}
+
+.header-banner {
+	text-align: center;
+	color: white;
+	background-image: url("wall.jpeg");
+	background-size: 100% 100%;
+}
+
+.header-banner h3 {
+	font-family: Helvetica;
+	font-size:20px;
+	
+}
+
+/*buttons to show what filters are active*/
+.filterbar {
+  background-color: #fff;
+  text-align:center;
+  color: black;
+  padding-right: 50px;
+  padding-left: 50px;
+  padding-top: 40px;
+}
+
+.filterbtns {
+background-color: #ecf2f9;
+  color: black;
+  font-family:Helvetica;
+  padding: 10px 24px;
+  font-size: 15px;
+  border-radius: 12px;
+  
+}
+
+/* removes outline on button when clicked*/
+*:focus {
+    outline: none;
+}
+
+
+/*defining two sections*/
+.flexGrid {  
+  	display: -webkit-flex;
+	display: flex;
+}
+
+
+/* Create two unequal columns that sits next to each other */
+/* Sidebar/left column */
+.filter-section {
+    display: flex;
+	flex-direction: column;
+	background-color: #fff;
+	padding: 30px;
+	text-align: center;
+	color: black;
+}
+
+#roName {
+  border: none;
+  border-bottom: 2px solid black;
+  
+}
+
+.filter-section h3 {
+	font-family: Helvetica;
+	font-size: 20px;
+}
+
+.filter-section select {
+	font-family: Helvetica;
+}
+
+/*search placeholder*/
+::placeholder {
+  font-family: Helvetica;
+  color: black;
+  font-size:15px;
+}
+
+.empty-space{
+	display: flex;
+	flex-direction: column;
+	background-color: #fff;
+	padding: 100px;
+	text-align: center;
+	color: white;
+}
+
+
+.empty-space2{
+	display: flex;
+	flex-direction: column;
+	background-color: #fff;
+	padding: 30px;
+	text-align: center;
+	color: white;
+}
+
+/* Main column */
+.robot-section {
+  display: flex;
+  	flex-direction: row;
+  	flex-wrap: wrap;
+  	justify-content: center;
+	background-color: #ffffff;
+	padding: 20px;
+	text-align: center;
+	color: black;
+}
+
+
+
+
+
+
+/*Images to filter and hover overlay of specs */
+
+#container {
+  position:relative;
+  width: 250px;
+  padding: 10px;
+}
+
+#robotName {
+	padding: 15px;
+  	text-align: center;
+}
+
+#image {
+  display: block;
+  width: 270px;
+  height: 300px;
+}
+
+#overlay {
+    position: absolute;
+ 	top: 0;
+ 	bottom: 0;
+  	left: 0;
+  	right: 0;
+  	height: 100%;
+  	width: 100%;
+ 	opacity: 0;
+ 	transition: .5s ease;
+ 	background-color:#adc2eb /*#80bfff*/;
+ 	
+}
+
+#container:hover #overlay {
+  opacity: 1;
+}
+
+
+#specs {
+  color: white;
+  font-size: 15px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+
+
+/* dropdown buttons*/
+.dropbtn {
+  background-color: #ffffff;
+  color: black;
+  font-family:Helvetica;
+  min-width: 160px;
+  padding: 16px;
+  font-size: 15px;
+  border: none;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  padding: 20px;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  min-width: 160px;
+  z-index: 1;
+}
+
+.w3-show  {display: block;}
+
+
+.dropdown:hover .dropbtn {background-color: #ddd;}
+
+
+/* styling for custom select button*/
+/* The container must be positioned relative: */
+.custom-select {
+  position: relative;
+  font-family: Helvetica;
+}
+
+.select-selected:hover {
+  background-color: #ddd;
+}
+
+.custom-select select {
+  display: none; /*hide original SELECT element: */
+}
+
+.select-selected {
+  background-color: #ffffff;
+}
+
+/* Style the arrow inside the select element: */
+.select-selected:after {
+  position: absolute;
+  content: "";
+  top: 14px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: #fff transparent transparent transparent;
+}
+
+/* Point the arrow upwards when the select box is open (active): */
+.select-selected.select-arrow-active:after {
+  border-color: transparent transparent #fff transparent;
+  top: 7px;
+}
+
+/* style the items (options), including the selected item: */
+.select-items div,.select-selected {
+  color: black;
+  padding: 8px 16px;
+  border: 1px solid transparent;
+  /*border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;*/
+  cursor: pointer;
+  font-family:Helvetica;
+  font-size: 15px;
+}
+
+/* Style items (options): */
+.select-items {
+  position: absolute;
+  background-color: #ffffff;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+}
+
+/* Hide the items when the select box is closed: */
+.select-hide {
+  display: none;
+}
+
+.select-items div:hover, .same-as-selected {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+
+
+</style>

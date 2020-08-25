@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Machine Library</title>
+      <meta charset="UTF-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="MachineLibStyle.css">
+   </head>
+   <body>
+      <div class="header-banner">
+         <h1><img src="polarworksWhite.png" width="42" height="42" style:"display: inline-block;">Polarworks</h1>
+         <h2>Machine Library</h2>
+         <h3>DOWNLOAD ROBOTS</h3>
+         <div class="filterbar" id="active">
+             <button class="filterbtns" id=barName></button>
+             <button class="filterbtns" id=barType></button>
+             <button class="filterbtns" id=barMan></button>
+             <button class="filterbtns" id=barPay></button>
+             <button class="filterbtns" id=barWeight></button>
+             <button class="filterbtns" id=barReach></button>
+             <button class="filterbtns" id=barRepeat></button>
+             <button class="filterbtns" id=barAxes></button>
+         </div>
+      </div>
+      <div class="flexGrid">
+      	 <div class=empty-space></div> 	 
+         <div class="filter-section">
+            <input id="roName" value="" type="text" placeholder="Search..."><br>
+            <h3>Filter By</h3><br>
+            <div class="custom-select" style="width:200px;" id="manTypeClick">
+               			<select id="type">
+                  		<option value="">Type</option>
+                 		<option value="">ALL</option>
+                  		<option value="robot">Robot</option>
+                  		<option value="accessory">Accessory</option>
+               </select> 
+            </div> 
+            <br>
+            <div class="custom-select" style="width:200px;" id="manClick">
+               <select id="manufacturer">
+                  <option value="">Manufacturers</option>
+                  <option value="">ALL</option>
+                  <option value="ABB">ABB</option>
+                  <option value="Denso">Denso</option>
+                  <option value="Fanuc">Fanuc</option>
+                  <option value="Kuka">Kuka</option>
+                  <option value="Robotiq">Robotiq</option>
+                  <option value="SICK">SICK</option>
+                  <option value="Staubli">Staubli</option>
+                  <option value="Universal Robots">Universal Robots</option>
+               </select> 
+            </div> 
+               
+            <br> 
+              
+            <div class = "dropdown">
+				<button onclick="mypayDropdown()" class="dropbtn">Payload (kg)</button>
+				<div class="dropdown-content"id="payContainer">
+            		<p>Min: </p>
+            		<input id="payloadMin" value="0" type="number">
+            		<p>Max: </p>
+            		<input id="payloadMax" value="20" type="number">	
+				</div>
+			</div>
+			
+			<div class = "dropdown">
+				<button onclick="myweightDropdown()" class="dropbtn">Weight (kg)</button>
+				<div class="dropdown-content" id="weightContainer">
+            		<p>Min: </p>
+           		 	<input id="weightMin" value="0" type="number">
+            		<p>Max: </p>
+            		<input id="weightMax" value="150" type="number"><br>	
+				</div>
+			</div>
+			
+			<div class = "dropdown">
+				<button onclick="myreachDropdown()" class="dropbtn">Reach (mm)</button>
+				<div class="dropdown-content" id="reachContainer">
+            		<p>Min: </p>
+            		<input id="reachMin" value="100" type="number">
+            		<p>Max: </p>
+            		<input id="reachMax" value="1200" type="number">	
+				</div>
+			</div>
+			
+			<div class = "dropdown">
+				<button onclick="myrepeatDropdown()" class="dropbtn">Repeatability (mm)</button>
+				<div class="dropdown-content" id="repeatContainer">
+            		<p>Min: </p>
+            		<input id="repeatMin" value="0" type="number">
+            		<p>Max: </p>
+            		<input id="repeatMax" value="20" type="number">	
+				</div>
+			</div>
+				
+			<div class="custom-select" style="width:200px;" id="manAxisClick">
+               			<select id="axes">
+                  		<option value="">Axes</option>
+                 		<option value="">ALL</option>
+                  		<option value="5">5</option>
+                  		<option value="6">6</option>
+                  		<option value="7">7</option>
+               </select> 
+            </div> 
+            			
+				
+			
+	 </div>
+	 	 
+         <div class="robot-section" id="output"></div>
+         <div class=empty-space2></div>
+
+<!---script for filtering and custom button-->
+		 <!--script that holds library content-->
+		 <script type="text/javascript" src="library_v2.js"></script>
+         <script type="text/javascript">
+         /* make dropdowns clickable*/
+        	function mypayDropdown() {
+  			var x = document.getElementById("payContainer");
+  			if (x.className.indexOf("w3-show") == -1) {
+    		x.className += " w3-show";
+  			} 
+  			else { 
+   			x.className = x.className.replace(" w3-show", "");
+  			}
+			}
+			function myweightDropdown() {
+  			var x = document.getElementById("weightContainer");
+  			if (x.className.indexOf("w3-show") == -1) {
+    		x.className += " w3-show";
+  			} 
+  			else { 
+   			x.className = x.className.replace(" w3-show", "");
+  			}
+			}
+			function myreachDropdown() {
+  			var x = document.getElementById("reachContainer");
+  			if (x.className.indexOf("w3-show") == -1) {
+    		x.className += " w3-show";
+  			} 
+  			else { 
+   			x.className = x.className.replace(" w3-show", "");
+  			}
+			}
+			function myrepeatDropdown() {
+  			var x = document.getElementById("repeatContainer");
+  			if (x.className.indexOf("w3-show") == -1) {
+    		x.className += " w3-show";
+  			} 
+  			else { 
+   			x.className = x.className.replace(" w3-show", "");
+  			}
+			}
+         
+         /* filter stuff*/
+         
+            var filters = {
+            	roName: "",
+            	type: "",
+            	manufacturer: "",
+            	payloadMin: 0,
+            	payloadMax: 200,
+            	weightMin: 0,
+            	weightMax: 500,
+            	reachMin: 0,
+            	reachMax: 3000,
+            	repeatMin: 0,
+            	repeatMax: 1,
+            	axes: ""
+            };
+            
+            roName.value = filters.roName;
+            type.value = filters.type;
+            manufacturer.value = filters.manufacturer;
+            payloadMin.value = filters.payloadMin;
+            payloadMax.value = filters.payloadMax;
+            weightMin.value = filters.weightMin;
+            weightMax.value = filters.weightMax;
+            reachMin.value = filters.reachMin;
+            reachMax.value = filters.reachMax;
+            repeatMin.value = filters.repeatMin;
+            repeatMax.value = filters.repeatMax;
+            axes.value = filters.axes;
+            
+            roName.addEventListener("change", function(){
+            	filters.roName = roName.value;
+            	update();
+            });
+            
+            manTypeClick.addEventListener("click", function(){
+            	filters.type = type.value;
+            	update();
+            });
+            
+            manClick.addEventListener("click", function(){
+            	filters.manufacturer = manufacturer.value;
+            	update();
+            });
+            
+            manAxisClick.addEventListener("click", function(){
+            	filters.axes = axes.value;
+            	update();
+            });
+            
+            
+            payloadMin.addEventListener("input", function(){
+            	filters.payloadMin = payloadMin.value;
+            	filters.payloadMax = payloadMax.value;
+            	update();
+            });
+            
+            payloadMax.addEventListener("input", function(){
+            	filters.payloadMin = payloadMin.value;
+            	filters.payloadMax = payloadMax.value;
+            	update();
+            });
+            
+            weightMin.addEventListener("input", function(){
+            	filters.weightMin = weightMin.value;
+            	filters.weightMax = weightMax.value;
+            	update();
+            });
+            
+            weightMax.addEventListener("input", function(){
+            	filters.weightMin = weightMin.value;
+            	filters.weightMax = weightMax.value;
+            	update();
+             });
+             
+            reachMin.addEventListener("input", function(){
+            	filters.reachMin = reachMin.value;
+            	filters.reachMax = reachMax.value;
+            	update();
+            });
+            
+            reachMax.addEventListener("input", function(){
+            	filters.reachMin = reachMin.value;
+            	filters.reachMax = reachMax.value;
+            	update();
+             });
+             
+             repeatMin.addEventListener("input", function(){
+            	filters.repeatMin = repeatMin.value;
+            	filters.repeatMax = repeatMax.value;
+            	update();
+            });
+            
+            repeatMax.addEventListener("input", function(){
+            	filters.repeatMin = repeatMin.value;
+            	filters.repeatMax = repeatMax.value;
+            	update();
+             });
+            
+            function filterroName(robot){
+            	return ((!filters.roName.length) || (robot.roName == filters.roName));
+            }
+            
+            function filterType(robot){
+            	return ((!filters.type.length) || (robot.type == filters.type));
+            }
+            
+            function filterManufacturer(robot){
+            	return ((!filters.manufacturer.length) || (robot.manufacturer == filters.manufacturer));
+            }
+            
+            function filterPayload(robot){
+            	return ((robot.payloadMin >= filters.payloadMin) && (robot.payloadMax<= filters.payloadMax));
+            }
+            
+            function filterWeight(robot){
+            	return ((robot.weightMin >= filters.weightMin) && (robot.weightMax<= filters.weightMax));
+            }
+            
+            function filterReach(robot){
+            	return ((robot.reachMin >= filters.reachMin) && (robot.reachMax<= filters.reachMax));
+            }
+            function filterRepeat(robot){
+            	return ((robot.repeatMin >= filters.repeatMin) && (robot.repeatMax<= filters.repeatMax));
+            }
+            
+            function filterAxis(robot){
+            	return ((!filters.axes.length) || (robot.axes == filters.axes));
+            }
+            
+            
+            function update() {
+              let filteredCards = getRobots().filter(filterroName).filter(filterType).filter(filterManufacturer).filter(filterPayload).filter(filterWeight).filter(filterReach).filter(filterRepeat).filter(filterAxis);
+              
+              
+              document.getElementById('barName').innerHTML ='Name: ' + filters.roName;
+              document.getElementById('barType').innerHTML ='Type: ' + filters.type;
+              document.getElementById('barMan').innerHTML ='Manufacturer: ' + filters.manufacturer;
+              document.getElementById('barPay').innerHTML ='Payload: ' + filters.payloadMin + " - " +  filters.payloadMax;
+              document.getElementById('barWeight').innerHTML ='Weight: ' + filters.weightMin + " - " +  filters.weightMax;
+              document.getElementById('barReach').innerHTML ='Reach: ' + filters.reachMin + " - " +  filters.reachMax;
+              document.getElementById('barRepeat').innerHTML ='Repeatability: ' + filters.repeatMin + " - " +  filters.repeatMax;
+              document.getElementById('barAxes').innerHTML ='Axes: ' + filters.axes;
+              
+              
+              console.log(filters);
+              output.innerHTML = filteredCards.map(robot => 
+              ` <div id="container">
+              		<img id="image" src="${robot.image}"/>
+              		<div id="robotName">${robot.roName}</div>
+              		<div id="overlay">
+                       <div id="specs">
+                         <p>Name: ${robot.roName}</p>
+                         <p>Manufacturer: ${robot.manufacturer}</p>
+                         <p>Payload (kg): ${robot.payloadMin}</p>
+                         <p>Weight (kg): ${robot.weightMin}</p>
+                         <p>Reach (mm): ${robot.reachMin}</p>
+                         <p>Repeatability (mm): ${robot.repeatMin}</p>
+                         <p>Axes: ${robot.axes}</p>
+                       </div>
+               	       </div>
+               	    </div>
+               
+               </div>`).join("");
+            };
+            update();
+            
+            function getRobots() {
+            	return library;
+            }
+         
+var x, i, j, l, ll, selElmnt, a, b, c;
+/*look for any elements with the class "custom-select":*/
+x = document.getElementsByClassName("custom-select");
+l = x.length;
+for (i = 0; i < l; i++) {
+  selElmnt = x[i].getElementsByTagName("select")[0];
+  ll = selElmnt.length;
+  /*for each element, create a new DIV that will act as the selected item:*/
+  a = document.createElement("DIV");
+  a.setAttribute("class", "select-selected");
+  a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
+  x[i].appendChild(a);
+  /*for each element, create a new DIV that will contain the option list:*/
+  b = document.createElement("DIV");
+  b.setAttribute("class", "select-items select-hide");
+  for (j = 1; j < ll; j++) {
+    /*for each option in the original select element,
+    create a new DIV that will act as an option item:*/
+    c = document.createElement("DIV");
+    c.innerHTML = selElmnt.options[j].innerHTML;
+    c.addEventListener("click", function(e) {
+        /*when an item is clicked, update the original select box,
+        and the selected item:*/
+        var y, i, k, s, h, sl, yl;
+        s = this.parentNode.parentNode.getElementsByTagName("select")[0];
+        sl = s.length;
+        h = this.parentNode.previousSibling;
+        for (i = 0; i < sl; i++) {
+          if (s.options[i].innerHTML == this.innerHTML) {
+            s.selectedIndex = i;
+            h.innerHTML = this.innerHTML;
+            y = this.parentNode.getElementsByClassName("same-as-selected");
+            yl = y.length;
+            for (k = 0; k < yl; k++) {
+              y[k].removeAttribute("class");
+            }
+            this.setAttribute("class", "same-as-selected");
+            break;
+          }
+        }
+        h.click();
+    });
+    b.appendChild(c);
+  }
+  x[i].appendChild(b);
+  a.addEventListener("click", function(e) {
+      /*when the select box is clicked, close any other select boxes,
+      and open/close the current select box:*/
+      e.stopPropagation();
+      closeAllSelect(this);
+      this.nextSibling.classList.toggle("select-hide");
+      this.classList.toggle("select-arrow-active");
+    });
+}
+function closeAllSelect(elmnt) {
+  /*a function that will close all select boxes in the document,
+  except the current select box:*/
+  var x, y, i, xl, yl, arrNo = [];
+  x = document.getElementsByClassName("select-items");
+  y = document.getElementsByClassName("select-selected");
+  xl = x.length;
+  yl = y.length;
+  for (i = 0; i < yl; i++) {
+    if (elmnt == y[i]) {
+      arrNo.push(i)
+    } else {
+      y[i].classList.remove("select-arrow-active");
+    }
+  }
+  for (i = 0; i < xl; i++) {
+    if (arrNo.indexOf(i)) {
+      x[i].classList.add("select-hide");
+    }
+  }
+}
+/*if the user clicks anywhere outside the select box,
+then close all select boxes:*/
+document.addEventListener("click", closeAllSelect);
+</script>
+      </div>
+   </body>
+</html>
