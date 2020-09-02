@@ -253,21 +253,6 @@ const library = [
             		image:"./Robot_Images/ur3e.jpg"
                 },
             	{
-            		roName: "Inspector P64X",
-            		type: "accessory",
-            		manufacturer:"SICK",
-            		payloadMin: 0,
-            		payloadMax:0 ,
-            		weightMin: 0,
-            		weightMax: 0,
-            		reachMin: 0,
-            		reachMax: 0,
-            		repeatMin:0 ,
-            		repeatMax: 0,
-            		axes:"" ,
-            		image:"./Robot_Images/s300.png"
-                },
-            	{
             		roName: "FT300",
             		type: "accessory",
             		manufacturer:"Robotiq",
